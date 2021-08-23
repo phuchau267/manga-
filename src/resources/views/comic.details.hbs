@@ -1,0 +1,191 @@
+
+<style>
+    #subnav {
+        margin-bottom: 3rem;
+    }
+    .subnav-container {
+        padding: 0 !important;
+    }
+</style>
+
+        <section class="cover"> 
+            <picture>
+                <source srcset="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg" type="image/jpeg" 
+                media="(max-width: 768px)"/>
+
+                <img itemprop="thumbnailUrl" class="backgroundBanner__img" alt="{{comic.title}} Background" 
+                src="{{img_url}}/{{comic.thumbnail.url}}-thumbnail-original.jpeg" 
+                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== 769w"
+                />
+            </picture>
+        </section>
+
+        <section id="resize" class="container mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="breadcrumb-container d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="/">Trang chủ</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <a id="linkcomic">{{comic.title}}</a>
+                            </li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-4"></div>
+                    <div class="row">
+                        <div id="leftbox" class="col-12 col-xl-3 col-md-4 col-sm-12 col-left" style="margin: 0 0 auto 0;">
+                            <div class="infoLeft">
+                                <div class="card infoLeft__img p-xl-3 col-5 col-xl-12 col-md-12 col-sm-4">
+                                    {{#if comic.thumbnail}}
+                                    <img src="https://s3.eu-central-1.wasabisys.com/cloudimagewallbucket/{{comic.thumbnail.url}}-thumbnail-original.jpeg"
+                                        type="image/jpeg" alt="img" width="100%" height="auto">
+                                    {{else}}
+                                    <div id="message__missingThumbnail"
+                                        style="vertical-align: middle;position: unset;position: relative;padding: .75rem 1.25rem;margin-bottom: 1rem;border: 1px solid transparent;"
+                                        class="alert alert-warning alert-dismissible fade show rounded pl-2 pr-1" role="alert">
+                                        <strong class="ml-2">Bạn chưa upload Thumbnail</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span style="vertical-align: middle;" aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                <div class="p-3 card infoLeft__title col-sm-12">
+                                    <h1 id="main-title" class="font-weight-bold">{{comic.title}}</h1>
+                                    <h4 id="sub-title" class="text-muted text-small mb-3">Immortal Emperor Luo Wuji Luo Wuji, The Reverent
+                                        Saint, The Immortal Emperor Luo Wuji has returned, 仙尊洛无极</h4>
+                                </div>
+                                <div class="infoLeft__activities">
+                                    <ul>
+                                        <form onclick="return subscribe(this);" 
+                                        class="{{#ifCond subscribe '==' true}}bookmark--subscribed{{/ifCond}}
+                                        light-red bookmark btn btn-primary default btn-block mb-1">
+                                            <input type="hidden" name="comicId" value="{{comic._id}}">
+                                            <i class="bookmark__icon far fa-bookmark"></i>
+                                            <span class="bookmark__text"></span>
+                                        </form>
+                                        <div class="group" style="box-shadow: 0 1px 15px rgb(0 0 0 / 10%), 0 1px 8px rgb(0 0 0 / 10%);">
+                                            <div class="group__item">
+                                                <i class="fas fa-user-alt"></i>
+                                                <span>{{comic.view.totalView}}</span>
+                                            </div>
+
+                                            {{!-- <div class="bar"></div> --}}
+                                            
+                                            <div class="mt-2 group__item">
+                                                <i class="fas fa-star"></i>
+                                                <span class="rateNum">{{rateValue}}</span>
+                                                <div class="dropdown d-inline-block">
+                                                    <div class="light-red rate badge badge-pill badge-primary mb-1" role="button" id="dropdownMenuLink"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Đánh giá
+                                                    </div>
+                                                    <div class="dropdown-menu " aria-labelledby="dropdownMenuLink" x-placement="bottom-start"
+                                                        style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                                        <div id="rating" class="rating" data-rate-value=5></div>
+                                                        <div class="rateCount text-info text-center mt-2"> ( <span class="countNum">{{rateCount}}</span> votes ) </div>
+                                                        <div class="msg-success text-success text-center mt-2 d-none"> Đã đánh giá </div>
+                                                        <div class="msg-fail text-danger text-center mt-2 d-none"> Bạn đã đánh giá truyện này rồi </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </ul>
+                                </div>
+                                
+                    
+                                <div class="card infoLeft__info">
+                                    <div class="box">
+                                        <div class="box__name">Trạng thái</div> <span class="box__value text-muted">Ongoing</span>
+                                    </div>
+                                    <div class="box">
+                                        <div class="box__name">Tác giả</div> <span class="box__value text-muted">Fuyuki, turtle me</span>
+                                    </div>
+                                    <div class="box">
+                                        <div class="box__name">Lượt xem</div> <span class="box__value box__value--bold">{{comic.view.totalView}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="rightbox" class="col-12 col-xl-9 col-md-8 col-sm-12 col-right">
+                            <div class="infoRight card mb-4">
+                                <div class="infoRight__body card-body">
+                                    <h1 id="main-title" itemprop="name" class="font-weight-bold">{{comic.title}}</h1>
+                                    <h4 id="sub-title" itemprop="alternativeHeadline" class="text-muted text-small mb-3">Immortal Emperor Luo Wuji Luo Wuji, The Reverent
+                                        Saint, The Immortal Emperor Luo Wuji has returned, 仙尊洛无极</h4>
+                                    <div id="tags" class="mb-3">
+                                        {{#each comic.category}}
+                                        <span class="badge badge-pill badge-outline-primary mb-1" style="font-weight: 500;">{{this.name}}</span>
+                                        {{/each}}
+                                    </div>
+                                    <p class="font-weight-bold">Synopsis {{comic.title}}</p>
+                                    <p itemprop="description">
+                                        Vivamus ultricies augue vitae commodo condimentum. Nullam
+                                        faucibus eros eu mauris feugiat, eget consectetur tortor tempus. Sed volutpat
+                                        mollis dui eget fringilla. Vestibulum blandit urna ut tellus lobortis tristique.
+                                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+                                        Curae; Pellentesque quis cursus mauris. Nam in ornare erat. Vestibulum convallis
+                                        enim ac massa dapibus consectetur. Maecenas facilisis eros ac felis mattis, eget
+                                        auctor sapien varius.
+                                        <br>
+                                        <br>
+                                        Nulla non purus fermentum, pulvinar dui condimentum,
+                                        malesuada nibh. Sed viverra quam urna, at condimentum ante viverra non. Mauris
+                                        posuere erat sapien, a convallis libero lobortis sit amet. Suspendisse in orci
+                                        tellus.
+                                    </p>
+                        
+                        
+                                </div>
+                            </div>
+                            <div class="chapterRight card mb-4">
+                                <div class="btnbox card-body">
+                                    <a href="/comic/{{comic.slug}}/{{firstChapter.chapter}}" class="light-red btnbox__firstChapter btn btn-primary mb-1">
+                                        <span> Chapter đầu </span>
+                                        <span style="font-size: 1.1rem;"> {{replaceHyphenIntoSpace firstChapter.chapter}}</span>
+                                    </a>
+                                    <a href="/comic/{{comic.slug}}/{{lastChapter.chapter}}" class="light-red btnbox__lastChapter btn btn-primary mb-1">
+                                        <span> Chapter cuối </span>
+                                        <span style="font-size: 1.1rem;"> {{replaceHyphenIntoSpace lastChapter.chapter}} </span>
+                                    </a>
+                                </div>
+                                <div class="listbox">
+                                    {{#each comic.chapters}}
+                                    <a href="/comic/{{../comic.slug}}/{{this.chapter}}" class="listbox__chapterbtn">
+                                        <span class="chaptertext"> {{replaceHyphenIntoSpace this.chapter}} </span>
+                                        <span class="date text-muted"> {{CalcTimeEnglish this.updatedAt}}</span>
+                                    </a>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="commentbox" class="col-12 mb-4"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+<instuff>
+
+{{!-- user info --}}
+<input name="user_id" value="{{user._id}}" type="hidden"></input>
+<input name="userName" value="{{user.name}}" type="hidden"></input>
+{{!-- comic info --}}
+<input name="isComicComment" value="true" value=true type="hidden"></input>
+<input name="isComicReply" value="true" value=true type="hidden"></input>
+<input name="comicId" value="{{comic._id}}" type="hidden"></input>
+<input name="title" value="{{comic.title}}" type="hidden"></input>
+<input name="comicSlug" value="{{comic.slug}}" type="hidden"></input>
+
+</instuff>
+
+
+
+

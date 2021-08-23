@@ -1,0 +1,570 @@
+<section id="top-displayer" itemprop="articleSection">
+    <background-banner id="background-banner" class="backgroundBanner">
+    {{#each config.banner_background}}
+        <picture>
+            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" 
+            media="(min-width: 1200px)"/>
+            <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" 
+            media="(min-width: 1200px)"/>
+
+            <img class="backgroundBanner__img" alt="Background Banner" 
+            src="{{../img_url}}/{{this.url}}-thumbnail.jpeg" 
+            srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== 1200w"
+            />
+        </picture>
+    {{/each}}
+    </background-banner>
+    <grid-container>
+        <banner-main>
+            <div id="glide_banner" class="glide">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        {{#each config.banner}}
+                        <li class="glide__slide">
+                            <a href="#" class="frame">
+                                <picture>
+                                    <source 
+                                    srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" 
+                                    media="(min-width: 650px)"/>
+                                    <source 
+                                    srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" 
+                                    media="(min-width: 650px)"/>
+                                    <source 
+                                    srcset="{{../img_url}}/{{this.url}}-thumbnail-small.webp" type="image/webp" 
+                                    media="(min-width: 0px)"/>
+                                
+                                    <img style="width: 100%;height: 100%;"
+                                    {{!-- width="800" height="400" --}}
+                                    alt="banner" 
+                                    src="{{../img_url}}/{{this.url}}-thumbnail.jpeg"
+                                    />
+                                </picture>
+                            </a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="glide__arrows slider-nav" data-glide-el="controls">
+                    <div class="glide__bullets slider-dot-container" data-glide-el="controls[nav]">
+                        <button class="glide__bullet glide__bullet--custom slider-dot glide__bullet--active"
+                            data-glide-dir="=0"></button>
+                        <button class="glide__bullet glide__bullet--custom slider-dot" data-glide-dir="=1"></button>
+                        <button class="glide__bullet glide__bullet--custom slider-dot" data-glide-dir="=2"></button>
+                    </div>
+                </div>
+            </div>
+        </banner-main>
+        <banner-topright class="topright-pic" >
+            {{#each config.banner_topright}}
+            <picture>
+                <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" media="(min-width: 1200px)" />
+                <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" media="(min-width: 1200px)" />
+            
+                <img alt="Banner Top images" 
+                    src="{{../img_url}}/{{this.url}}-thumbnail.jpeg" 
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== 1200w"
+                />
+            </picture>
+            {{/each}}
+        </banner-topright>
+        <banner-botright class="topbot-pic">
+            {{#each config.banner_botright}}
+            <picture>
+                <source srcset="{{../img_url}}/{{this.url}}-thumbnail.webp" type="image/webp" media="(min-width: 1200px)" />
+                <source srcset="{{../img_url}}/{{this.url}}-thumbnail.jpeg" type="image/jpeg" media="(min-width: 1200px)" />
+            
+                <img alt="Banner Bottom images" 
+                    src="{{../img_url}}/{{this.url}}-thumbnail.jpeg" 
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== 1200w"
+                />
+            </picture>
+            {{/each}}
+        </banner-botright>
+    </grid-container>
+</section>
+
+<section id="categories-nav" itemprop="articleSection">
+    <ul class="categoires-container">
+        <li id="hidden-btn" class="category" style="color: var(--button-text-unimportant);"
+        data-toggle="tooltip" data-placement="top" title=" Under Construction !! ">
+            <i class="fas fa-2x fa-chevron-circle-down"></i>
+        </li>
+        <li onclick="location = this.children[0].href" class="category active"><a href="/comic/categories/Action">Action</a></li>
+        <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/Adventure">Adventure</a></li>
+        <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/Romance">Romance</a></li>
+        <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/Fantasy">Fantasy</a></li>
+        <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/SliceofLife">Slice of Life</a></li>
+        <li onclick="location = this.children[0].href" class="more"><a href="/comic/categories/all">MORE GENRES</a></li>
+    </ul>
+</section>
+
+<section id="welcome-places" itemprop="articleSection" class="foreground-color border-bottom-2">
+    <heading class="container">
+        <h2 class="title">
+            Lần đầu đến với DORE
+        </h2>
+        <icon-right>
+            <i class="fas fa-chevron-right"></i>
+        </icon-right>
+    </heading>
+
+    <slider-container id="slider-container" class="d-block container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-md-12 pl-0 pr-0">
+                        <div id="glide_1" class="glide basic">
+                            <div class="glide__track" data-glide-el="track">
+                                <div class="glide__slides glide__slides--custom">
+
+                                    <div class="glide__slide glide__slide--2">
+                                        {{#each (limitFrom config.slider 0 4)}}
+                                            {{#ifCond @index '!%' 4}}
+                                            <item>
+                                                <glide-img>
+                                                    <picture class="lazy">
+                                                        <source 
+                                                            data-srcset="{{../../img_url}}/{{../this.url}}-thumbnail.webp"
+                                                            data-srcmain="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/webp" />
+                                                    
+                                                        <img 
+                                                        width="210" height="210" alt="{{../this.title}}" 
+                                                        onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                                    </picture>
+                                                </glide-img>
+                                                <comic-info class="comic-info comic-info--top">
+                                                    <title class="title title--ellipsis title--bot color-black">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <grade class="color-black">
+                                                        <a href="#" class="fas fa-heart color-theme-2"><span class="num">35. 657</span></a>
+                                                    </grade>
+                                                    <category class="d-none">
+                                                        Action
+                                                    </category>
+                                                </comic-info>
+                                                <comic-info-back class="comic-info-back">
+                                                    <color-overlay></color-overlay>
+                                                    <title class=" title--ellipsis title--bot">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <author>
+                                                        <a href="#">{{../this.author}}</a>
+                                                    </author>
+                                                    <description class="description--ellipsis-default">
+                                                        {{../this.description}}
+                                                    </description>
+                                                </comic-info-back>
+                                            </item>
+                                            {{else}}
+                                            <item>
+                                                <glide-img>
+                                                    <picture class="lazy">
+                                                        <source 
+                                                            data-srcset="{{../../img_url}}/{{../this.url}}-thumbnail.webp"
+                                                            data-srcmain="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/webp" />
+                                                    
+                                                        <img 
+                                                        width="210" height="210" alt="{{../this.title}}" 
+                                                        onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                                    </picture>
+                                                </glide-img>
+                                                <comic-info class="comic-info comic-info--top">
+                                                    <title class="title title--ellipsis title--bot color-white">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <description>
+                                                        {{../this.description}}
+                                                    </description>
+                                                    <grade>
+                                                        <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
+                                                    </grade>
+                                                    <category class="d-none">
+                                                        Action
+                                                    </category>
+                                                </comic-info>
+                                                <comic-info-back class="comic-info-back comic-info-back--wide">
+                                                    <color-overlay></color-overlay>
+                                                    <title class=" title--ellipsis title--bot">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <author>
+                                                        <a href="#">{{this.author}}</a>
+                                                    </author>
+                                                    <description class="description--ellipsis-wide">
+                                                        {{../this.description}}
+                                                    </description>
+                                                </comic-info-back>
+                                            </item>
+                                            {{/ifCond}}
+                                        {{/each}}
+                                    </div>
+
+                                    <div class="glide__slide glide__slide--2">
+                                        {{#each (limitFrom config.slider 4 8)}}
+                                            {{#ifCond @index '!%' 4}}
+                                            <item>
+                                                <glide-img>
+                                                    <picture>
+                                                        <source srcset="{{../../img_url}}/{{../this.url}}-thumbnail.webp" type="image/webp" />
+                                                        <source srcset="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/jpeg" />
+                                                    
+                                                        <img 
+                                                        alt="{{../this.title}}"
+                                                        width="210" height="210" src="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg"
+                                                            onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                                    </picture>
+                                                </glide-img>
+                                                <comic-info class="comic-info comic-info--top">
+                                                    <title class="title title--ellipsis title--bot color-black">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <grade class="color-black">
+                                                        <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">35. 657</span></a>
+                                                    </grade>
+                                                    <category class="d-none">
+                                                        Action
+                                                    </category>
+                                                </comic-info>
+                                                <comic-info-back class="comic-info-back">
+                                                    <color-overlay></color-overlay>
+                                                    <title class=" title--ellipsis title--bot">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <author>
+                                                        <a href="#">{{../this.author}}</a>
+                                                    </author>
+                                                    <description class="description--ellipsis-default">
+                                                        {{../this.description}}
+                                                    </description>
+                                                </comic-info-back>
+                                            </item>
+                                            {{else}}
+                                            <item>
+                                                <glide-img>
+                                                    <picture>
+                                                        <source srcset="{{../../img_url}}/{{../this.url}}-thumbnail-small.webp" type="image/webp" />
+                                                        <source srcset="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg" type="image/jpeg" />
+                                                    
+                                                        <img 
+                                                        alt="{{../this.title}}"
+                                                        src="{{../../img_url}}/{{../this.url}}-thumbnail.jpeg"
+                                                            onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                                    </picture>
+                                                </glide-img>
+                                                <comic-info class="comic-info comic-info--top">
+                                                    <title class="title title--ellipsis title--bot color-white">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <description>
+                                                        {{../this.description}}
+                                                    </description>
+                                                    <grade>
+                                                        <a href="#" class="fa fa fa-heart color-theme-2"><span class="num">352. 657</span></a>
+                                                    </grade>
+                                                    <category class="d-none">
+                                                        Action
+                                                    </category>
+                                                </comic-info>
+                                                <comic-info-back class="comic-info-back comic-info-back--wide">
+                                                    <color-overlay></color-overlay>
+                                                    <title class=" title--ellipsis title--bot">
+                                                        {{../this.title}}
+                                                    </title>
+                                                    <author>
+                                                        <a href="#">{{this.author}}</a>
+                                                    </author>
+                                                    <description class="description--ellipsis-wide">
+                                                        {{../this.description}}
+                                                    </description>
+                                                </comic-info-back>
+                                            </item>
+                                            {{/ifCond}}
+                                        {{/each}}
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            {{!-- <div class="glide__arrows sliderBox" data-glide-el="controls">
+                                <span class="slick-prev" aria-label="Previous"
+                                    data-glide-dir="<">
+                                    <i class="fas fa-2x fa-chevron-left"></i>
+                                </span>
+                                <span class="slick-next" aria-label="Next" data-glide-dir=">">
+                                    <i class="fas fa-2x fa-chevron-right"></i>
+                                </span>
+                            </div> --}}
+                            <div class="glide__arrows glide__arrows--custom slider-nav" data-glide-el="controls">
+                                <div class="glide__bullets slider-dot-container" data-glide-el="controls[nav]">
+                                    <button class="glide__bullet glide__bullet--custom slider-dot" data-glide-dir="=0"></button>
+                                    <button class="glide__bullet glide__bullet--custom slider-dot" data-glide-dir="=1"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </slider-container>
+</section>
+
+<section id="bookmark-places" itemprop="articleSection"class="foreground-color">
+    <heading class="container">
+        <h2 class="title">
+            My Series
+        </h2>
+        <icon-right>
+            <i class="fas fa-chevron-right"></i>
+        </icon-right>
+    </heading>
+
+    <slider-container id="slider-container" class="d-block container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-md-12 pl-0 pr-0">
+                        <div id="glide_2" class="glide basic">
+                            <div class="glide__track" data-glide-el="track">
+                                <div id="glide__slides" class="glide__slides">
+
+                                    {{#if user}}
+                                    {{#each sublist.subscribed}}
+                                    <div class="glide__slide">
+                                            <picture>
+                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp" type="image/webp" />
+                                                <source srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" type="image/jpeg" />
+                                            
+                                                <img width="198" height="160" src="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg"
+                                                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                                            </picture>
+                                        {{!-- <badges>
+                                            Up
+                                        </badges> --}}
+                                        <bottom-info>
+                                            <a href="/comic/{{this.slug}}">
+                                                <info-title class="ellipsis">
+                                                    {{this.title}}
+                                                </info-title>
+                                            </a>
+                                            <a href="/comic/{{this.slug}}/{{getObjValues (limit this.chapters 1) "chapter"}}">
+                                                <info-chapter id="chapter-{{getObjValues (limit this.chapters 1) "_id"}}">
+                                                    {{chapterText (getObjValues (limit this.chapters 1) "chapter")}}
+                                                    <span>{{CalcTimeEnglish this.updatedAt}}</span>
+                                                </info-chapter>
+                                            </a>
+                                            <form
+                                                onclick="return subscribe(this);" 
+                                                class="info-sub info-sub--subscribed">
+                                                <input name="comicId" value="{{this._id}}" type="hidden">
+                                                <i class="fas fa-check"></i>
+                                            </form>
+                                        </bottom-info>
+                                    </div>
+                                    {{/each}}
+                                    {{/if}}
+
+                                </div>
+                            </div>
+                            
+                            <div class="glide__arrows slider-nav" data-glide-el="controls">
+                                <div class="glide__bullets slider-dot-container" data-glide-el="controls[nav]">
+                                    <button class="glide__bullet slider-dot" data-glide-dir="=0"></button>
+                                    <button class="glide__bullet slider-dot" data-glide-dir="=1"></button>
+                                    <button class="glide__bullet slider-dot" data-glide-dir="=2"></button>
+                                    <button class="glide__bullet slider-dot" data-glide-dir="=3"></button>
+                                    <button class="glide__bullet slider-dot" data-glide-dir="=4"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </slider-container>
+</section>
+
+<section id="lastest-update-places" itemprop="articleBody">
+    <wrapper-big class="container">
+
+        <heading class="container">
+            <h2 class="title">
+                Cập nhật mới nhất
+            </h2>
+            <icon-right>
+                <i class="fas fa-chevron-right"></i>
+            </icon-right>
+        </heading>
+        
+        <grid-container>
+            {{#each comics}}
+            <item class="item item--border">
+                
+                <picture class="lazy">
+                    <source
+                    data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
+                    data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" 
+                    type="image/webp"
+                    />
+                
+                    <img width="92" height="120"
+                    alt="{{this.title}}" 
+                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                </picture>
+                
+                <info>
+                    <a href="./comic/{{this.slug}}"><title class="title title--ellipsis">{{this.title}}</title></a> 
+                    <chapter-box>
+                        {{#each (limit lastest_chapters 2)}}
+                        <a href="/comic/{{../this.slug}}/{{this.chapter}}">
+                            <chapter class="chapter" id="chapter-{{this._id}}">{{replaceHyphenIntoSpace this.chapter}}<span class="left-auto">{{CalcTimeEnglish this.updatedAt}}</span></chapter>
+                        </a>
+                        {{/each}}
+                    </chapter-box>
+                </info>
+            </item>
+            {{/each}}
+        </grid-container>
+
+        {{> pagination}} 
+        
+
+    </wrapper-big>
+</section>
+
+<section id="comics-gridbox" itemprop="articleSection" class="mb-4 border-top-bot-3">
+    <intro-container class="intro">
+        <h2>
+            Hot Nhất 
+            {{!-- <span>TODAY</span>  --}}
+        </h2>
+        <p>
+            Spend your free time 
+            </br>In Epic tales of grand journeys 
+            </br>All these Popular series on Dorecomic.
+        </p>
+        <btn-intro>
+            Find out more
+        </btn-intro>
+    </intro-container>
+
+    <grid-container class="grid">
+        {{#each topComicsByView}}
+        <grid-comic-item class="grid__item">
+            <a href="/comic/{{this.slug}}">
+                <background-overlay></background-overlay>
+                
+                <picture class="lazy">
+                    <source
+                    data-srcset="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.webp"
+                    data-srcmain="{{../img_url}}/{{this.thumbnail.url}}-thumbnail.jpeg" 
+                    type="image/webp"
+                    />
+                
+                    <img width="160" height="160"
+                    alt="{{this.title}}" 
+                    onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                </picture>
+
+                <comic-info>
+                    <title class="title title--ellipsis title--bot">
+                        {{this.title}}
+                    </title>
+                    <grade class="ellipsis">
+                        {{this.author}}
+                    </grade>
+                    <category class="d-none">
+                        Action
+                    </category>
+                </comic-info>
+            </a>
+        </grid-comic-item>
+        {{/each}}
+        
+    </grid-container>
+</section>
+
+
+<instuff>
+    
+{{!-- user info --}}
+<input name="user_id" value="{{user._id}}" type="hidden"></input>
+<input name="userName" value="{{user.name}}" type="hidden"></input>
+{{!-- comic info --}}
+</instuff>
+
+
+<script id="glides-template" type="text/x-handlebars-template">
+\{{#if isLoggedIn}} 
+
+    \{{#each historyItems}}
+        \{{#ifCond (compareListId this.comicId ../sublist.subscribed) '==' true}}
+        \{{else}}
+        <div id="comic-\{{this.comicId}}" class="glide__slide">
+                <picture>
+                    <source srcset="\{{this.thumbnail}}-thumbnail.webp" type="image/webp" />
+                    <source srcset="\{{this.thumbnail}}-thumbnail.jpeg" type="image/jpeg" />
+            
+                    <img alt="\{{this.title}}" width="198" height="160" src="\{{this.thumbnail}}-thumbnail.jpeg"
+                        onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                </picture>
+            
+            <bottom-info>
+                <a href="\{{this.comicUrl}}">
+                    <info-title class="ellipsis">
+                        \{{this.title}}
+                    </info-title>
+                    \{{#each (limitlast this.chapterNameList 1) }}
+                        <info-chapter id="chapter-\{{this._id}}">
+                        \{{chapterText this.chapter}}
+                        </info-chapter>
+                    \{{/each}}
+                </a>
+                <form onclick="return subscribe(this);" class="info-sub">
+                    <input name="comicId" value="\{{this.comicId}}" type="hidden">
+                    <i class="fas fa-check"></i>
+                </form>
+            </bottom-info>
+        </div>
+        \{{/ifCond}}
+    \{{/each}}
+
+\{{else}}
+
+    \{{#each historyItems}}
+    <div id="comic-\{{this.comicId}}" class="glide__slide">
+        <picture >
+            <source srcset="\{{this.thumbnail}}-thumbnail.webp"
+                type="image/webp" />
+            <source srcset="\{{this.thumbnail}}-thumbnail.jpeg"
+                type="image/jpeg" />
+    
+            <img alt="\{{this.title}}" width="198" height="160"
+                src="\{{this.thumbnail}}-thumbnail.jpeg"
+                onerror="this.onerror=null;this.src='/img/404.jpg';" />
+        </picture>
+        <bottom-info>
+            <a href="\{{this.comicUrl}}">
+                <info-title class="ellipsis">
+                    \{{this.title}}
+                </info-title>
+            </a>
+            <a href="\{{this.chapterUrl}}">
+                \{{#each (limitlast this.chapterNameList 1) }}
+                    <info-chapter id="chapter-\{{this._id}}">
+                    \{{chapterText this.chapter}}
+                    </info-chapter>
+                \{{/each}}
+            </a>
+            <info-sub onclick="return subscribe(this);" class="info-sub">
+                <input name="comicId" value="temp" type="hidden">
+                <i class="fas fa-check"></i>
+            </info-sub>
+        </bottom-info>
+    </div>
+    \{{/each}}
+    
+\{{/if}}
+</script>
+
+

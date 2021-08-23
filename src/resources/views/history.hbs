@@ -1,0 +1,162 @@
+<style>
+    #navbar {
+        background: var(--background-color) !important; 
+    }
+    html, body {
+        background: var(--foreground-color) !important;
+    }
+</style>
+<categories-wrapper id="categories-wrapper">
+    <div class="categories-inner">
+        <ul class="categories">
+            <li onclick="location = this.children[0].href" class="category active">
+            <a href="/comic/categories/all">Tất cả</a>
+            </li>
+            {{#each firstCategories}}
+            <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/{{this.name}}">{{this.name}}</a></li>
+            {{/each}}
+            <li class="category"><div onclick="return drop(this);" class="more">Xem thêm<i class="fas fa-sort-down"></i></div></li>
+        </ul>
+    </div>
+    <div id="categories-outer" class="categories-outer">
+        <ul class="categories">
+            {{#each remainingCategories}}
+            <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/{{this.name}}">{{this.name}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</categories-wrapper>
+
+
+<section id="lastest-update-places" style="padding: 3rem 0 0 0;"></section>
+
+<script id="history-template" type="text/x-handlebars-template">
+    <wrapper-big class="container">
+
+        <heading class="container">
+            <h2 class="title">
+                Cập nhật mới nhất
+            </h2>
+            <icon-right>
+                <i class="fas fa-chevron-right"></i>
+            </icon-right>
+        </heading>
+        
+        <grid-container>
+            \{{#each comics}}
+            <item class="item item--border">
+                
+                <picture>
+                    <source srcset="\{{this.thumbnail}}-thumbnail.webp" type="image/webp" />
+                    <source srcset="\{{this.thumbnail}}-thumbnail.jpeg" type="image/jpeg" />
+            
+                    <img alt="\{{this.title}}" width="92" height="120" src="\{{this.thumbnail}}-thumbnail.jpeg"
+                        onerror="this.onerror=null;this.src='/img/404.jpg';" />
+                </picture>
+                
+                <info>
+                    <a href="\{{this.comicUrl}}"><title class="title title--ellipsis">\{{this.title}}</title></a> 
+                    <chapter-box>
+                        
+                        \{{#each (limit chapterNameList 2)}}
+                        <a href="\{{../this.chapterUrl}}">
+                            <chapter class="chapter" id="chapter-\{{this._id}}">
+                                \{{this.chapter}}
+                            </chapter>
+                        </a>
+                        \{{/each}}
+                    </chapter-box>
+                </info>
+            </item>
+            \{{/each}}
+        </grid-container>
+
+        
+
+    </wrapper-big>
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+<script>
+    
+
+    $( document ).ready(function() {
+
+        var $href = window.location.href;
+        var $user_id = $("input[type=hidden][name=user_id]").val()
+        var isLoggedIn = ($user_id) ? true : false
+        /* local History */
+
+        constructHistory()
+        
+        function addClassVisited() {
+
+            //filter remove empty string in array
+            var visited_chapters_list = JSON.parse(localStorage.getItem('visited_chapters')).filter(items => items);
+            if (visited_chapters_list == null ) return
+
+            var $glide2      = $('#glide_2')
+            var $lastestupdateplaces = $('#lastest-update-places')
+
+            for (let i = 0; i < visited_chapters_list.length; i++) {
+                $glide2.find(`#chapter-${visited_chapters_list[i]}`).addClass('visited')
+                $lastestupdateplaces.find(`#chapter-${visited_chapters_list[i]}`).addClass('visited')
+            }
+            
+        }
+        
+        function constructHistory() {
+            var visited_comics_list = JSON.parse(localStorage.getItem('visited_comics'));
+            if (visited_comics_list == null) return
+
+            /* helper */
+            Handlebars.registerHelper('ifCond', function (a, operator, b, options) {
+                switch (operator) {
+                    case '==':
+                        return (a == b) ? options.fn(this) : options.inverse(this);
+                    case '===':
+                        return (a === b) ? options.fn(this) : options.inverse(this);
+                    case '!=':
+                        return (a != b) ? options.fn(this) : options.inverse(this);
+                    case '!==':
+                        return (a !== b) ? options.fn(this) : options.inverse(this);
+                    case '<':
+                        return (a < b) ? options.fn(this) : options.inverse(this);
+                    case '<=':
+                        return (a <= b) ? options.fn(this) : options.inverse(this);
+                    case '>':
+                        return (a > b) ? options.fn(this) : options.inverse(this);
+                    case '>=':
+                        return (a >= b) ? options.fn(this) : options.inverse(this);
+                    case '&&':
+                        return (a && b) ? options.fn(this) : options.inverse(this);
+                    case '||':
+                        return (a || b) ? options.fn(this) : options.inverse(this);
+                    default:
+                        return options.inverse(this);
+                }
+            })
+            Handlebars.registerHelper('limit', (arr, limit) => {
+                if (!Array.isArray(arr)) { return []; }
+                return arr.slice(0, limit);
+            }) 
+            Handlebars.registerHelper('replaceHyphenIntoSpace', (str) => {
+                str = str.toString().replace(/-/g, ' ').replace("apter", '.');
+                return str && str[0].toUpperCase() + str.slice(1);// replace '-' -> space 
+            })
+            
+            var content             = visited_comics_list
+            var source              = $("#history-template").html()
+            console.log(source)
+            var template            = Handlebars.compile(source)
+            var html                = template({comics: content})
+            $('#lastest-update-places').append(html).slideDown('slow')
+            addClassVisited()
+        }
+
+        /* 🛑 end local History */
+        
+    });
+</script>

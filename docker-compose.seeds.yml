@@ -1,0 +1,34 @@
+version: '3'
+services:
+    nginx:
+        ports:
+            - "80:80"
+
+    node-app:
+        build:
+            # Location of dockerFile
+            context: .
+            args:
+                NODE_ENV: production
+        environment:
+            - NODE_ENV=production
+            # Remove Later :x:
+            - MONGO_USER=${MONGO_USER}
+            - MONGO_PASSWORD=${MONGO_PASSWORD}
+            - WASABI_ACCESS_KEY_ID=${WASABI_ACCESS_KEY_ID}
+            - WASABI_SECRET_ACCESS_KEY=${WASABI_SECRET_ACCESS_KEY}
+        command: node ./src/index.js
+    mongo:
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    mongo_seed:
+        image: mongo
+        links:
+            - mongo
+        depends_on:
+            - mongo
+        volumes:
+            - ./mongo-seed:/mongo-seed
+        command:
+            /mongo-seed/import.sh
