@@ -1,365 +1,81 @@
 <style>
-  .card-course-item {
-  margin-top: 16px; }
-
-.user-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  margin-right: 4px; }
-
-.disabled {
-  pointer-events: none; }
-
-.followbtn {
-  display: block; }
-
-.loginModal {
-  opacity: 0;
-  visibility: hidden;
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: black;
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
-  transition: all .2s; }
-
-.showModalAnimation {
-  opacity: 1;
-  visibility: visible; }
-
-.sign-title {
-  font-weight: bold;
-  margin-bottom: 20px; }
-
-.sign-submit {
-  border-radius: 20px;
-  border: 1px solid #FF4B2B;
-  background-color: #FF4B2B;
-  color: #FFFFFF;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 12px 45px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: transform 80ms ease-in;
-  margin-top: 20px; }
-
-.sign-submit:active {
-  transform: scale(0.95); }
-
-.sign-submit:focus {
-  outline: none; }
-
-.sign-form {
-  background-color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
-  text-align: center; }
-
-.sign-input {
-  background-color: #eee;
-  border: 1px solid #eee;
-  padding: 12px 15px;
-  margin: 8px 0;
-  width: 100%; }
-  .sign-input:focus {
-    outline: none; }
-
-.sign-container {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  overflow: hidden;
-  width: 768px;
-  min-height: 480px; }
-
-.sign-in-container {
-  left: 0;
-  width: 50%;
-  z-index: 2; }
-
-.sign-up-container {
-  left: 0;
-  width: 50%;
-  opacity: 0;
-  z-index: 1; }
-
-.sign-container.right-panel-active .sign-in-container {
-  transform: translateX(100%); }
-
-.sign-container.right-panel-active .sign-up-container {
-  transform: translateX(100%);
-  opacity: 1;
-  z-index: 5;
-  animation: show 0.6s; }
-
-.sign-container.right-panel-active .overlay-container {
-  transform: translateX(-100%); }
-
-.sign-container.right-panel-active .overlay {
-  transform: translateX(50%); }
-
-.sign-container.right-panel-active .overlay-left {
-  transform: translateX(0); }
-
-.sign-container.right-panel-active .overlay-right {
-  transform: translateX(20%); }
-
-.overlay {
-  background: #FF416C;
-  background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-  background: linear-gradient(to right, #FF4B2B, #FF416C);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 0 0;
-  color: #FFFFFF;
-  position: relative;
-  left: -100%;
-  height: 100%;
-  width: 200%;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out; }
-  .overlay-description {
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 20px;
-    letter-spacing: 0.5px;
-    margin: 20px 0 30px; }
-  .overlay-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    transition: transform 0.6s ease-in-out;
-    z-index: 100; }
-  .overlay-panel {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 40px;
-    text-align: center;
-    top: 0;
-    height: 100%;
-    width: 50%;
-    transform: translateX(0);
-    transition: transform 0.6s ease-in-out; }
-  .overlay-left {
-    transform: translateX(-20%); }
-  .overlay-right {
-    right: 0;
-    transform: translateX(0); }
-
-.login-by-social-account {
-  margin: 20px 0;
-  font-size: 15px; }
-
-.social {
-  color: #333;
-  font-size: 16px;
-  text-decoration: none;
-  transition: all .2s;
-  border: 1px solid #DDDDDD;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 5px;
-  height: 45px;
-  width: 45px; }
-  .social-facebook-icon:hover {
-    color: #2D88FF; }
-  .social-google-icon:hover {
-    color: #EA4435; }
-
-.ghost {
-  background-color: transparent;
-  border-radius: 20px;
-  border: 1px solid #FFFFFF;
-  color: #FFFFFF;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 12px 45px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: transform 80ms ease-in; }
-  .ghost:active {
-    transform: scale(0.95); }
-
-.form-container {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  transition: all 0.6s ease-in-out; }
-
-@keyframes show {
-  0%, 49.99% {
-    opacity: 0;
-    z-index: 1; }
-  50%, 100% {
-    opacity: 1;
-    z-index: 5; } }
-
-.alert-container {
-  width: 768px;
-  margin: 10px auto; }
-
+    .form-control {
+        border:none;
+        border-bottom: 1px solid var(--separator-color);
+        outline: none;
+    }
+    .form-group {
+        padding-top: 0.5rem;
+        font-size: 1rem;
+    }
 </style>
-<div class="alert-container">
-  {{#ifCond username '==' 0}}
-  <div class="alert alert-danger" role="alert">
-    ban chua nhap tai khoan
-  </div>
-  {{/ifCond}}
+<body class="background show-spinner no-footer">
+    <div class="fixed-background"></div>
+    <main>
+        <div class="container">
+            <div class="row">
+            </div>
+            <div class="row h-100">
+                <div class="col-12 col-md-10 mx-auto my-auto">
+                    <div class="card auth-card">
+                        <div class="position-relative image-side ">
 
-  {{#ifCond password '==' 0}}
-  <div class="alert alert-danger" role="alert">
-    ban chua nhap mat khau
-  </div>
-  {{/ifCond}}
+                            <p class=" text-white h2">MAGIC IS IN THE DETAILS</p>
 
-  {{#ifCond wrongPassword '==' true}}
-  <div class="alert alert-danger" role="alert">
-    mat khau sai
-  </div>
-  {{/ifCond}}
+                            <p class="white mb-0">
+                                Please use your credentials to login.
+                                <br>If you are not a member, please
+                                <a href="#" class="white">register</a>.
+                            </p>
+                        </div>
+                        <div class="form-side">
+                            {{!-- <a href="Dashboard.Default.html">
+                                <span class="logo-single"></span>
+                            </a> --}}
+                            
+                           
 
-  {{#ifCond wrongUsername '==' true}}
-  <div class="alert alert-danger" role="alert">
-    khong tim thay ten tai khoan nay
-  </div>
-  {{/ifCond}}
+                            <h2 class="mb-5 ml-1 "><i class="p-2 fas fa-sign-in-alt"></i>Login</h2>
+                            <form id="comicCreateForm" action="/users/login" method="POST">
+                                <label class="form-group has-float-label">
+                                    <span class="mr-2">Email</span>
+                                    <input class="form-control" type="email" id="email" name="email" class="customInput" value="{{email}}" 
+                                    required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                                    
+                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                    </svg>
+                                </label>
+                                <label class="form-group has-float-label">
+                                    <span class="mr-2">Password</span>
+                                    <input class="form-control" type="password" id="password" name="password" class="customInput" 
+                                        value="{{password}}" required minlength="6" />
+                                    <svg viewBox="0 0 40 2" class="line" preserveAspectRatio="none">
+                                        <path d="M0 1 L40 1"></path>
+                                        <path d="M0 1 L40 1" class="focus"></path>
+                                        <path d="M0 1 L40 1" class="invalid"></path>
+                                        <path d="M0 1 L40 1" class="valid"></path>
+                                    </svg>
+                                </label>
 
-  {{#ifCond registerUsername '==' 0}}
-  <div class="alert alert-danger" role="alert">
-    ban chua nhap tai khoan
-  </div>
-  {{/ifCond}}
+                                <input class="form-control" type="hidden" name="referer" class="customInput" value="{{referer}}"/>
 
-  {{#ifCond registerPassword '==' 0}}
-  <div class="alert alert-danger" role="alert">
-    ban chua nhap mat khau
-  </div>
-  {{/ifCond}}
+                                <div class="d-flex justify-content-between align-items-center">
+                                
+                                     <a href="/users/register" class="btn btn-outline-primary btn-xs btn-shadow">GO REGISTER</a> 
+                                    <button class="btn btn-primary btn-lg btn-shadow" type="submit">LOGIN</button>
+                                </div>
+                            </form>
 
-  {{#ifCond confirmPassword '==' 0}}
-  <div class="alert alert-danger" role="alert">
-    ban chua nhap lai mat khau
-  </div>
-  {{/ifCond}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
 
-  {{#ifCond acceptRegisterUsername '==' 1}}
-  <div class="alert alert-danger" role="alert">
-    tai khoan nay da co nguoi su dung
-  </div>
-  {{/ifCond}}
-
-  {{#ifCond acceptRegisterUsername '==' 2}}
-  <div class="alert alert-danger" role="alert">
-    tai khoan can it nhat 7 ki tu
-  </div>
-  {{/ifCond}}
-
-  {{#ifCond acceptRegisterPassword '==' 2}}
-  <div class="alert alert-danger" role="alert">
-    mat khau can it nhat 7 ki tu
-  </div>
-  {{/ifCond}}
-
-  {{#ifCond acceptConfirmPassword '==' 1}}
-  <div class="alert alert-danger" role="alert">
-    mat khau nhap lai khong chinh xac
-  </div>
-  {{/ifCond}}
-
-</div>
-
-<div class="sign-container {{#ifCond registerSubmit '==' true}}right-panel-active {{/ifCond}}" id="container2">
-  <div class="form-container sign-up-container">
-    <form action="/users/register" method="POST" class="sign-form">
-      <h1 class="sign-title">Đăng ký</h1>
-
-
-      <input class="sign-input form-control {{#ifCond registerUsername '==' 0}} is-invalid {{/ifCond}} {{#ifCond acceptRegisterUsername '==' 1}} is-invalid {{/ifCond}} {{#ifCond acceptRegisterUsername '==' 2}} is-invalid {{/ifCond}} {{#ifCond acceptRegisterUsername '==' 3}} is-valid {{/ifCond}}" {{#ifCond registerUsername '!=' 0}} value="{{../registerUsername}}" {{/ifCond}} name="registerUsername" type="text" placeholder="Username" />
-
-      <input class="sign-input form-control {{#ifCond registerPassword '==' 0}} is-invalid {{/ifCond}} {{#ifCond acceptRegisterPassword '==' 2}} is-invalid {{/ifCond}} {{#ifCond acceptRegisterPassword '==' 3}} is-valid {{/ifCond}}" {{#ifCond registerPassword '!=' 0}} value="{{../registerPassword}}" {{/ifCond}} name="registerPassword" type="password" placeholder="Password" />
-      <input class="sign-input form-control {{#ifCond confirmPassword '==' 0}} is-invalid {{/ifCond}} {{#ifCond acceptConfirmPassword '==' 1}} is-invalid {{/ifCond}}" {{#ifCond confirmPassword '!=' 0}} value="{{../confirmPassword}}" {{/ifCond}} name="confirmPassword" type="password" placeholder="Confirm Password" />
-      <button class="sign-submit" type="submit" id="sign-up__submit2">Đăng ký</button>
-      <span class="login-by-social-account">hoặc đăng nhập bằng:</span>
-      <div class="social-container">
-        <a href="/users/facebook/login" class="social social-facebook-icon"><i class="fab fa-facebook-f"></i></a>
-        <a href="/users/google/login" class="social social-google-icon"><i class="fab fa-google-plus-g"></i></a>
-
-      </div>
-    </form>
-  </div>
-  <div class="form-container sign-in-container">
-    <form action="/users/login" method="POST" class="sign-form">
-      <h1 class="sign-title">Đăng nhập</h1>
-
-
-      <input class="sign-input form-control {{#ifCond username '==' 0}} is-invalid {{/ifCond}} {{#ifCond wrongUsername '==' true}} is-invalid {{/ifCond}} {{#ifCond wrongUsername '==' false}} is-valid {{/ifCond}}" {{#ifCond username '!=' 0}} value="{{../username}}" {{/ifCond}} name="username" type="text" placeholder="Username" />
-      <input class="sign-input form-control {{#ifCond username '==' 0}} is-invalid {{/ifCond}} {{#ifCond wrongPassword '==' true}} is-invalid {{/ifCond}}" {{#ifCond password '!=' 0}} value="{{../password}}" {{/ifCond}}  name="password" type="password" placeholder="Password" />
-
-      <button class="sign-submit" type="submit" id="sign-in__submit2">Đăng nhập</button>
-      <span class="login-by-social-account">hoặc đăng nhập bằng:</span>
-      <div class="social-container">
-        <a href="/users/facebook/login" class="social social-facebook-icon"><i class="fab fa-facebook-f"></i></a>
-        <a href="/users/google/login" class="social social-google-icon"><i class="fab fa-google-plus-g"></i></a>
-
-      </div>
-    </form>
-  </div>
-  <div class="overlay-container">
-    <div class="overlay">
-      <div class="overlay-panel overlay-left">
-        <h1 class="sign-title">Welcome Back!</h1>
-        <p class="overlay-description">Nếu đã có tài khoản thì đăng nhập ở đây</p>
-        <button class="ghost" id="signIn2">Đăng nhập</button>
-      </div>
-      <div class="overlay-panel overlay-right">
-        <h1 class="sign-title">Chào Người Mới!</h1>
-        <p class="overlay-description">Nếu chưa có tài khoản thì đăng ký ở đây</p>
-        <button class="ghost" id="signUp2">Đăng ký</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-	const signUpButton2 = document.getElementById('signUp2');
-	const signInButton2 = document.getElementById('signIn2');
-	const container2 = document.getElementById('container2');
-
-	signUpButton2.addEventListener('click', () => {
-		container2.classList.add("right-panel-active");
-	});
-
-	signInButton2.addEventListener('click', () => {
-		container2.classList.remove("right-panel-active");
-	});
-})
-</script>

@@ -18,16 +18,16 @@
             
             <div class="row">
                 <div class="col-12">
-                    <h1>Tạo truyện mới</h1>
+                    <h1>Create Comic</h1>
                     <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                         <ol class="breadcrumb pt-0">
                             <li class="breadcrumb-item">
                                 <a href="#">Pages</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/me/stored/comics/comic-list">Tất cả truyện</a>
+                                <a href="/me/stored/comics/comic-list">All Comics</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Tạo truyện mới</li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Comic</li>
                         </ol>
                     </nav>
                     <div class="separator mb-5"></div>
@@ -36,7 +36,7 @@
 
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="mb-4">Truyện mới</h5>
+                    <h5 class="mb-4">New Comic</h5>
                     {{!-- form --}}
                     <form id="comicCreateForm" method="POST" action="/me/stored/comics/create">
                         <label class="form-group has-float-label">
@@ -48,12 +48,12 @@
                                 <path d="M0 1 L40 1" class="invalid"></path>
                                 <path d="M0 1 L40 1" class="valid"></path>
                             </svg>
-                            <span> Tiêu đề </span>
+                            <span> Title </span>
                         </label>
 
                         <label class="form-group has-float-label">
                             <input class="form-control" id="title" name="subtitle" />
-                            <span> Tiêu đề phụ</span>
+                            <span> Sub title</span>
                         </label>
                         
                         <label class="form-group has-float-label">
@@ -62,7 +62,7 @@
                             <textarea name="description" class="form-control" aria-label="With textarea" 
                             style="margin-top: 0px; margin-bottom: 0px; height: 59px;"></textarea>
                             </div>
-                            <span>Mô tả</span>
+                            <span>Description</span>
                         </label>
                         
                         <div class="form-row mb-4 ml-1">
@@ -91,7 +91,7 @@
                                         <path d="M0 1 L40 1" class="invalid"></path>
                                         <path d="M0 1 L40 1" class="valid"></path>
                                       </svg>
-                                      <span>Tác giả</span>
+                                      <span>Author</span>
                                     </label>
                                 </div>
                                 {{!-- <div class="form-group col-md-4">
@@ -122,8 +122,8 @@
                                 </label> 
                             </div> {{!-- End CheckBox --}}
                             
-                        <button class="btn btn-primary default" type="submit">Đăng</button>
-                        <button onclick="reset()" class="ml-4 btn btn-primary default">Hủy</button>
+                        <button class="btn btn-primary default" type="submit">Submit</button>
+                        <button onclick="reset()" class="ml-4 btn btn-primary default">Clear</button>
                     </form> {{!-- /form --}}
 
                 </div>

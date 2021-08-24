@@ -33,9 +33,9 @@
                         <textarea name="text" style="display:none"></textarea>
                         <div id="buttonbox" class="mt-5 buttonbox buttonbox--hide">
                             <button type="button" onclick="return normalState(this);"
-                                class="resetbtn btn default buttonbox__clearbtn">Hủy</button>
+                                class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                             <button type="submit" class="ml-4 btn btn-primary default d-block ">
-                                Chỉnh sửa</button>
+                                Edit</button>
                         </div>
                     </form>
                 </comment>
@@ -44,7 +44,7 @@
                 <toolbar id="toolbar" class="toolbar">
                     <div id="like"><i class="fas fa-thumbs-up"></i></div>
                     <div id="dislike"><i class="fas fa-thumbs-down"></i></div>
-                    <div onclick="return showReplyBox(this);" id="reply">Trả lời</div>
+                    <div onclick="return showReplyBox(this);" id="reply">Reply</div>
                 </toolbar>
 
                 {{!-- replydialog --}}
@@ -72,9 +72,9 @@
                                     </label>
                                     <div id="buttonbox" class="buttonbox buttonbox--flex">
                                         <button type="button" onfocus="return resetInput(this);"
-                                            class="resetbtn btn default buttonbox__clearbtn">Hủy</button>
+                                            class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                                         <button type="submit" class="ml-4 btn btn-primary default d-block ">
-                                            Đăng</button>
+                                            POST</button>
                                     </div>
                                 </form>
                             </div>
@@ -89,14 +89,14 @@
                         aria-expanded="false">
                         <i class="menu__icon fas fa-ellipsis-v"></i>
                         <div class="menu__dropdown dropdown-menu">
-                            <a onclick="return editableContent(this);" class="dropdown-item" href="#">Chỉnh sửa</a>
-                            <a class="dropdown-item" href="#">Báo cáo</a>
+                            <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
+                            <a class="dropdown-item" href="#">Report</a>
                             <div class="dropdown-divider"></div>
                             <form method="POST" onclick="return destroyReply(this);"
                                 enctype="application/x-www-form-urlencoded">
                                 <input name="reply_id" value="{{this._id}}" type="hidden"></input>
                                 <input name="comment_id" value="{{../this._id}}" type="hidden"></input>
-                                <button type="submit" aria-label="Close" class="text-danger dropdown-item">Xóa</a>
+                                <button type="submit" aria-label="Close" class="text-danger dropdown-item">Delete</a>
                             </form>
                         </div>
                     </action-menu>

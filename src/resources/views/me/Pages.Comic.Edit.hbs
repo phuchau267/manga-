@@ -15,14 +15,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <h1>Chỉnh sửa truyện</h1>
+                    <h1>Edit Comic</h1>
                     <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                         <ol class="breadcrumb pt-0">
                             <li class="breadcrumb-item">
                                 <a href="#">Pages</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a id="linkcomic" href="/me/stored/comics/comic-list">Tất cả truyện</a>
+                                <a id="linkcomic" href="/me/stored/comics/comic-list">All Comics</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
                                {{comic.title}}
@@ -78,7 +78,7 @@
                                             <form class="dropzone" action="/me/stored/comics/{{comic.slug}}/S3-thumbnail-upload" id="buldUploadForm" method="POST" enctype="multipart/form-data">
                                             <div class="dz-clickable" id="uploadDropzone">
                                                 <div class="dz-default dz-message" data-dz-message>
-                                                    <span>Thả 1 ảnh vào đây để upload</span>
+                                                    <span>Drop 1 image here to upload</span>
                                                 </div>
                                             
                                             </div>
@@ -95,19 +95,19 @@
                          <div class="col-12 col-md-12 col-xl-8 col-right">
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <h3 class="mb-4"><strong> Chỉnh sửa truyện </strong></h3>
+                                    <h3 class="mb-4"><strong> Edit Comic </strong></h3>
 
                                     {{!-- form --}}
                                     <form method="POST" action="/me/stored/comics/{{comic.slug}}?_method=PUT ">
                                         <label class="form-group has-float-label">
                                             <input class="form-control" id="title" name="title" 
                                                 value="{{comic.title}}"/>
-                                            <span>Tiêu đề</span>
+                                            <span>Title</span>
                                         </label>
                                     
                                         <label class="form-group has-float-label">
                                             <textarea class="form-control datepicker" id="description" name="description">{{comic.description}}  </textarea>
-                                            <span>Mô tả</span>
+                                            <span>Description</span>
                                         </label>
 
                                         {{!-- <div class="form-row">
@@ -149,14 +149,14 @@
                                                 <input type="radio" id="customRadio3" name="isFinish" class="custom-control-input" 
                                                 value=true {{#ifCond comic.isFinish '==' true}} checked {{/ifCond}}>
                                                 <label class="custom-control-label" for="customRadio3" >
-                                                    Đang thực hiện
+                                                    In Progress
                                                 </label>
                                             </div>
                                             <div class="custom-control custom-radio ml-4">
                                                 <input type="radio" id="customRadio4" name="isFinish" class="custom-control-input" 
                                                 value=false {{#ifCond comic.isFinish '==' false}} checked {{/ifCond}}>
                                                 <label class="custom-control-label" for="customRadio4">
-                                                    Đã hoàn thành
+                                                    Finished
                                                 </label>
                                             </div>
                                         </div> {{!-- End Custom Radio Group 2 --}}

@@ -8,14 +8,14 @@
         <div class="sort-text dropdown show">
             <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="sort-icon"></i>
-                Sắp xếp
+                Sort
             </a>
 
             <div id="sort-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="?">Mặc định</a>
-                <a class="dropdown-item" href="?_sort&column=commentArr&type=-1">Mới nhất</a>
-                <a class="dropdown-item" href="?_sort&column=commentArr&type=1">Cũ nhất</a>
-                <a class="dropdown-item" href="?_match=all&coloumn=updatedAt&type=1">Tất cả</a>
+                <a class="dropdown-item" href="?">Default</a>
+                <a class="dropdown-item" href="?_sort&column=commentArr&type=-1">Newest</a>
+                <a class="dropdown-item" href="?_sort&column=commentArr&type=1">Oldest</a>
+                <a class="dropdown-item" href="?_match=all&coloumn=updatedAt&type=1">All</a>
             </div>
         </div>
     </div>
@@ -44,18 +44,18 @@
                 </label>
                 <div id="buttonbox" class="buttonbox">
                     <button type="button" onclick="return resetInput(this);"
-                        class="resetbtn btn default buttonbox__clearbtn">Hủy</button>
+                        class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                     <button type="submit" class="ml-4 btn btn-primary default d-block ">
-                        Đăng</button>
+                        POST</button>
                 </div>
             </form>
         </div>
     </div>
 </simplebox>
 {{else}}
-<p class="text-medium">Đăng nhập để bình luận</p>
-<a href="/users/login" class="btn btn-primary mr-2 mb-5">Đăng nhập</a>
-<a href="/users/register" class="btn btn-primary mb-5">Đăng xuất</a>
+<p class="text-medium">Login to comment</p>
+<a href="/users/login" class="btn btn-primary mr-2 mb-5">Log in</a>
+<a href="/users/register" class="btn btn-primary mb-5">Sign up</a>
 {{/if}}
 
 <comments-container id="commentcontainer" itemscope itemtype="http://schema.org/UserComments">
@@ -93,9 +93,9 @@
                             <textarea name="text" style="display:none"></textarea>
                             <div id="buttonbox" class="mt-5 buttonbox buttonbox--hide">
                                 <button type="button" onclick="return normalState(this);"
-                                    class="resetbtn btn default buttonbox__clearbtn">Hủy</button>
+                                    class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                                 <button type="submit" class="ml-4 btn btn-primary default d-block ">
-                                    Chỉnh sửa</button>
+                                    Edit</button>
                             </div>
                         </form>
                     </comment>
@@ -105,7 +105,7 @@
                         <div id="like"><i class="fas fa-thumbs-up"></i></div>
                         <div id="dislike"><i class="fas fa-thumbs-down"></i></div>
                         {{#if ../../user}}
-                        <div onclick="return showReplyBox(this);" id="reply">Trả lời</div>
+                        <div onclick="return showReplyBox(this);" id="reply">Reply</div>
                         {{/if}}
                     </toolbar>
 
@@ -134,9 +134,9 @@
                                         </label>
                                         <div id="buttonbox" class="buttonbox buttonbox--flex">
                                             <button type="button" onclick="return resetInput(this);"
-                                                class="resetbtn btn default buttonbox__clearbtn">Hủy</button>
+                                                class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                                             <button type="submit" class="ml-4 btn btn-primary default d-block ">
-                                                Đăng</button>
+                                                POST</button>
                                         </div>
                                     </form>
                                 </div>
@@ -154,11 +154,11 @@
                                 data-expander="hide">
                                 <div id="more-replies" class="expander__more">
                                     <i class="expander__icon fas fa-caret-down"></i>
-                                    <span class="expander__text">Xem thêm {{@root.replyLength}} câu trả lời</span>
+                                    <span class="expander__text">{{@root.replyLength}} more replies</span>
                                 </div>
                                 <div id="less-replies" class="expander__less d-none">
                                     <i class="expander__icon fas fa-caret-up"></i>
-                                    <span class="expander__text">Ẩn {{@root.replyLength}} câu trả lời</span>
+                                    <span class="expander__text">Hide {{@root.replyLength}} replies</span>
                                 </div>
                             </expanderbtn>
                         </comment-replies-renderer>
@@ -172,8 +172,8 @@
                             <i class="menu__icon fas fa-ellipsis-v"></i>
                             <div class="menu__dropdown dropdown-menu">
                                 <a onclick="return editableContent(this);" class="dropdown-item" href="#">
-                                    Chỉnh sửa</a>
-                                <a class="dropdown-item" href="#">Báo cáo</a>
+                                    Edit</a>
+                                <a class="dropdown-item" href="#">Report</a>
                                 <div class="dropdown-divider"></div>
 
                                 <form method="POST" onclick="return destroyComment(this);"
@@ -181,7 +181,7 @@
                                     <input class="form-control" name="comment_id" value="{{this._id}}"
                                         type="hidden"></input>
                                     <button type="submit" aria-label="Close"
-                                        class="text-danger dropdown-item">Xóa</a>
+                                        class="text-danger dropdown-item">Delete</a>
                                 </form>
                             </div>
                         </action-menu>
@@ -226,9 +226,9 @@
                                 <textarea name="text" style="display:none"></textarea>
                                 <div id="buttonbox" class="mt-5 buttonbox buttonbox--hide">
                                     <button type="button" onclick="return normalState(this);"
-                                        class="resetbtn btn default buttonbox__clearbtn">Hủy</button>
+                                        class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                                     <button type="submit" class="ml-4 btn btn-primary default d-block ">
-                                        Chỉnh sửa</button>
+                                        Edit</button>
                                 </div>
                             </form>
                         </comment>
@@ -237,7 +237,7 @@
                         <toolbar id="toolbar" class="toolbar">
                             <div id="like"><i class="fas fa-thumbs-up"></i></div>
                             <div id="dislike"><i class="fas fa-thumbs-down"></i></div>
-                            <div onclick="return showReplyBox(this);" id="reply">Trả lời</div>
+                            <div onclick="return showReplyBox(this);" id="reply">Reply</div>
                         </toolbar>
 
                         {{!-- replydialog --}}
@@ -265,9 +265,9 @@
                                             </label>
                                             <div id="buttonbox" class="buttonbox buttonbox--flex">
                                                 <button type="button" onclick="return resetInput(this);"
-                                                    class="resetbtn btn default buttonbox__clearbtn">Hủy</button>
+                                                    class="resetbtn btn default buttonbox__clearbtn">CLEAR</button>
                                                 <button type="submit" class="ml-4 btn btn-primary default d-block ">
-                                                    Đăng</button>
+                                                    POST</button>
                                             </div>
                                         </form>
                                     </div>
@@ -282,15 +282,15 @@
                                 aria-expanded="false">
                                 <i class="menu__icon fas fa-ellipsis-v"></i>
                                 <div class="menu__dropdown dropdown-menu">
-                                    <a onclick="return editableContent(this);" class="dropdown-item" href="#">Chỉnh sửa</a>
-                                    <a class="dropdown-item" href="#">Báo cáo</a>
+                                    <a onclick="return editableContent(this);" class="dropdown-item" href="#">Edit</a>
+                                    <a class="dropdown-item" href="#">Report</a>
                                     <div class="dropdown-divider"></div>
                                     <form method="POST" onclick="return destroyReply(this);"
                                         enctype="application/x-www-form-urlencoded">
                                         <input name="reply_id" value="{{this._id}}" type="hidden"></input>
                                         <input name="comment_id" value="{{../this._id}}" type="hidden"></input>
                                         <button type="submit" aria-label="Close"
-                                            class="text-danger dropdown-item">Xóa</a>
+                                            class="text-danger dropdown-item">Delete</a>
                                     </form>
                                 </div>
                             </action-menu>
@@ -311,7 +311,7 @@
 <tools-footer id="tfooter" class="tfooter">
     <a data-page="2" onclick="return fetchMoreComments(this);"
         class="light-red tfooter__btn btn btn-primary default mb-1">
-        Xem thêm bình luận
+        More comments
     </a>
 </tools-footer>
 {{/ifCond}}

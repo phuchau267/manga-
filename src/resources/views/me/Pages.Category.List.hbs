@@ -16,13 +16,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <h1>Danh sách thể loại</h1>
+                    <h1>Category List</h1>
                     <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                         <ol class="breadcrumb pt-0">
                             <li class="breadcrumb-item">
                                 <a href="#">Pages</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Danh sách thể loại</li>
+                            <li class="breadcrumb-item active" aria-current="page">Category List</li>
                         </ol>
                     </nav>
                     <div class="separator mb-5"></div>
@@ -33,7 +33,7 @@
                 <div class="col-lg-6 col-sm-12">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="mb-4">Tạo thể loại mới</h5>
+                            <h5 class="mb-4">Create Category</h5>
                             {{!-- form --}}
                             <form id="comicCreateForm" method="POST" action="/me/stored/comics/category-list/create">
 
@@ -46,11 +46,11 @@
                                         <path d="M0 1 L40 1" class="invalid"></path>
                                         <path d="M0 1 L40 1" class="valid"></path>
                                     </svg>
-                                    <span>Tên</span>
+                                    <span>Name</span>
                                 </label>
 
                                 <div class="row">
-                                    <button class="mx-auto btn btn-primary default" type="submit">Tạo</button>
+                                    <button class="mx-auto btn btn-primary default" type="submit">Create</button>
                                 </div>
                             </form> {{!-- /form --}}
 
@@ -60,7 +60,7 @@
                 <div class="col-lg-6 col-sm-12">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="mb-4">Danh sách thể loại hiện tại</h5>
+                            <h5 class="mb-4">Current Categories</h5>
                             {{#each categories}}
                                 <a href="#" class="badge badge-secondary mb-1 mr-2 mt-2 position-relative">
                                     <span data-toggle="modal" 

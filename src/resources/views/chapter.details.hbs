@@ -153,7 +153,7 @@
             <select id="remove" onchange="location = this.value;" class="custom-select">
                 <option selected> {{replaceHyphenIntoHashmark chapter.chapter}}</option>
                 {{#each comics.chapters}}
-                    <option value="/comic/{{../comics.slug}}/{{this.chapter}}">{{replaceHyphenIntoHashmark this.chapter}}</option>
+                    <option value="/comic/{{../comics.slug}}/chapter-{{this.chapter}}">#{{this.chapter}}</option>
                 {{/each}}
             </select>
 
@@ -199,7 +199,7 @@
                 </picture>
                 
                 <info id="info">
-                    <div class="maintext">Chapter trước</div>
+                    <div class="maintext">Prev Chapter</div>
                     <div class="subtext">{{replaceHyphenIntoSpace prevChapter.chapter}}</div>
                 </info>
                 <right-icon id="right-icon">
@@ -249,7 +249,7 @@
                 </picture>
                 
                 <info id="info">
-                    <div class="maintext">Chapter sau</div>
+                    <div class="maintext">Next Chapter</div>
                     <div class="subtext">
                         {{replaceHyphenIntoSpace nextChapter.chapter}}
                     </div>

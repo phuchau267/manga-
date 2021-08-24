@@ -7,12 +7,12 @@
     <div class="categories-inner">
         <ul class="categories">
             <li onclick="location = this.children[0].href" class="category active">
-            <a href="/comic/categories/all">Tất cả</a>
+            <a href="/comic/categories/all">All</a>
             </li>
             {{#each firstCategories}}
             <li onclick="location = this.children[0].href" class="category"><a href="/comic/categories/{{this.name}}">{{this.name}}</a></li>
             {{/each}}
-            <li class="category"><div onclick="return drop(this);" class="more">Xem thêm<i class="fas fa-sort-down"></i></div></li>
+            <li class="category"><div onclick="return drop(this);" class="more">More<i class="fas fa-sort-down"></i></div></li>
         </ul>
     </div>
     <div id="categories-outer" class="categories-outer">

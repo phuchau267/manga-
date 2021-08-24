@@ -9,15 +9,13 @@ const { singleMongooseToObject } =  require('../../util/mongoose');
 const { IMAGE_URL, HOME_TITLE, HOME_DESCRIPTION
 , HOME_KEYWORDS, HOME_URL, HOME_SITENAME } = require('../../config/config');
 
-// connect to redis
-// const path  = require('path');
-// const redis = require(path.resolve('./src/config/redis'))
-// redis.connect();
 
 class SiteController {
 
     test2(req, res, next) {
         res.json(req.user)
+        // Comic.updateMany({}, {$unset: {lastest_chapters: 1 }}).then(res => console.log(res))
+
     }
     async test(req, res, next) {
         // const mongoose = require('mongoose')
@@ -94,7 +92,6 @@ class SiteController {
 
     // [GET] / Site
     index(req, res, next) {
-        // Comic.updateMany({}, {rate: {rateCount: 0, rateValue: 0}}).then(info => console.log(info))
         let id = (req.user) ? req.user._id : null
         let page = +req.query.page || 1;
         let PageSize = 10;
@@ -144,7 +141,6 @@ class SiteController {
                 home_url: HOME_URL,
                 home_sitename: HOME_SITENAME
             }
-            console.log(req.user)
             res.status(200).render('home', { 
                 layout: 'home_layout',
                 comics: comicsDoc,
@@ -153,7 +149,7 @@ class SiteController {
                 prevPage,
                 prevPage2,
                 pages: Math.ceil(count / PageSize),
-                user: req.user,
+                user: singleMongooseToObject(req.user),
                 img_url: IMAGE_URL,
                 config: config,
                 topComicsByView: topComicsByView,
