@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     {{!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
-    <title>Document</title>
+    <title>{{comic.title}}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="description" content="{{meta.home_description}}">
+    <meta name="author" content="{{meta.home_sitename}}">
+    <meta name="keywords" itemprop="keywords" content="{{meta.home_keywords}}">
+    
+    <meta property="og:title" content="{{comic.title}}">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{comic.description}}">
+    <meta property="og:url" content="{{meta.home_url}}/comic/{{comic.slug}}">
+    {{!-- <meta property="og:image" content="put comic thumbnail here"> --}}
+    <meta property="og:site_name" content="{{meta.home_sitename}}">
+
+    <meta name="twitter:title" content="{{comic.title}}">
+    <meta name="twitter:description" content="{{comic.description}}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="{{meta.home_sitename}}">
+    {{!-- <meta name="twitter:image" content="put comic thumbnail here"> --}}
+    
     {{!-- preconnect --}}
     <link rel="preconnect" href="https://s3.eu-central-1.wasabisys.com">
     {{!-- FontAweSome cdn --}}

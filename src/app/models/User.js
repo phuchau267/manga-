@@ -13,18 +13,14 @@ const opts = {
   timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") },
 };
 const User = new Schema({
-    name: {
-      type: String,
-      required: true
-    },
-    email: {
-      type: String,
-      required: true
-    },
-    password: {
-      type: String,
-      required: true
-    },
+  username:{type: String},
+  password:{type: String},
+  displayname:{type: String},
+  avatar:{type: String},
+  googleId:{type:String},
+    facebookId:{type:String},
+    userCreatedAt:{type: String},
+    userUpdatedAt:{type: String},
     role: {
       type: String,
       required: true,

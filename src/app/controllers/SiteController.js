@@ -149,7 +149,7 @@ class SiteController {
                 prevPage,
                 prevPage2,
                 pages: Math.ceil(count / PageSize),
-                user: singleMongooseToObject(req.user),
+                user: req.user,
                 img_url: IMAGE_URL,
                 config: config,
                 topComicsByView: topComicsByView,

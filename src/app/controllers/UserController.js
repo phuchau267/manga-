@@ -17,14 +17,62 @@ class UserController {
     }
 
     // Login
-    login(req, res, next) {
-        let referer = (req.body.referer !== '' && req.body.referer !== null) ? req.body.referer : '/'
-        passport.authenticate('local', {
-        successRedirect: referer,
-        failureRedirect: '/users/login',
-        failureFlash: true
-        })(req, res, next);
+    async login(req, res, next) {
+        let username = req.body.username;
+        let password = req.body.password;
+        let wrongPassword = false;
+        let wrongUsername = false;
+        let banned = false
+        if(!username) {
+            username = 0
+        }
+        if(!password){
+            password = 0
+        }
+        if(username && password){
+            const user = await User.findOne({username: username});
+            if(user){
+                if(user.banned === true){
+                    banned = true
+                    res.render('users/login', {
+                        layout: 'login_register_layout',
+                        banned
+                    });
+                }else{
+                    const validPassword = await bcrypt.compare(password, user.password)
+                    if(validPassword){
+                        passport.authenticate('local', function(err, user, info) {
+                            if (err) { return next(err); }
+                            if (!user) { return res.redirect('/users/login'); }
+                            req.logIn(user, function(err) {
+                                if (err) { 
+                                    return next(err); 
+                                }else{
+                                    return res.redirect('/')
+                                }
+                            });
+                        })(req, res, next);
+                    }else{
+                        wrongPassword = true
+                    }
+                }
+                
+            }else{
+                wrongUsername = true
+            }
+        }
+        if(username == 0 || password == 0 || wrongPassword == true || wrongUsername == true){
+            res.render('users/login', {
+                layout: 'login_register_layout',
+                username,
+                password,
+                wrongPassword,
+                wrongUsername,
+
+            });
+        }
     };
+    
     
     // Logout
     logout(req, res) {
@@ -35,87 +83,103 @@ class UserController {
 
     // Register Page
     registerPage(req, res, next) {
-        res.render('users/register', {
+        let registerSubmit = true;
+        res.render('users/login', {
+            registerSubmit,
             layout: 'login_register_layout'
         })
     }
     
     // Register
-    register(req, res, next) {
-        const layout = "login_register_layout"
-        const { name, email, password, password2 } = req.body;
-        let errors = [];
-
-        checkInput(name, email, password, password2)
-
-        if (errors.length > 0) {
-            res.render('users/register', {
-                layout: layout,
-                errors,
-                name,
-                email,
-                password,
-                password2
-            });
-        } else {
-            return createUser(email)
-        }
-
-        function checkInput(name, email, password, password2) {
-            if (!name || !email || !password || !password2) {
-            errors.push({ msg: 'Please enter all fields' });
-            }
-
-            if (password != password2) {
-                errors.push({ msg: 'Passwords do not match' });
-            }
-
-            if (password.length < 6) {
-                errors.push({ msg: 'Password must be at least 6 characters' });
-            }
-        }
+    async register(req, res, next) {
+        let registerUsername = req.body.registerUsername;
+        let registerPassword = req.body.registerPassword;
+        let confirmPassword = req.body.confirmPassword;
         
-        function createUser(email) {
-            User.findOne({email: email})
-            .then(user => {
-                if (user) {
-                    errors.push({ msg: 'Email Existed, Please use anothers' });
-                    res.render('users/register', {
-                        layout: layout,
-                        errors,
-                        name,
-                        email,
-                        password,
-                        password2
-                    });
-                } else {
-                    const newUser = new User({
-                        name,
-                        email,
-                        password
-                      });
-              
-                      bcrypt.genSalt(10, (err, salt) => {
-                        bcrypt.hash(newUser.password, salt, (err, hash) => {
-                          if (err) throw err;
-                          newUser.password = hash;
-                          newUser
-                            .save()
-                            .then(user => {
-                              req.flash('success-message', 'You are now registered and can log in');
-                              res.render('users/login', {
-                                  layout: layout,
-                                  email,
-                                  password
-                              })
-                            })
-                            .catch(next);
-                        });
-                      });
+        
+        
+        let acceptRegisterUsername = 0;
+        let acceptRegisterPassword = 0;
+        let acceptConfirmPassword = 0;
+        let banned = false;
+        let registerSubmit = true;
+        if(!registerUsername){
+            registerUsername = 0;
+        }else if(registerUsername.length >6){
+            const nameExist = await User.findOne({username: registerUsername});
+            if(nameExist){
+                acceptRegisterUsername = 1;
+                if(nameExist.banned === true){
+                    banned = true;
+                    
+                    res.render('users/login',{
+                        layout: 'login_register_layout',
+                        banned,
+                        registerSubmit
+                    })
+                }else{
+                    
+                    res.render('users/login',{
+                        layout: 'login_register_layout',
+                        acceptRegisterUsername,
+                        registerSubmit
+                    })
                 }
-            })
-            .catch(next)
+            }else{
+                acceptRegisterUsername = 3;
+            }
+        }else{
+            acceptRegisterUsername = 2;
         }
+        if(!registerPassword){
+            registerPassword = 0;
+        }else if(registerPassword.length >6){
+            acceptRegisterPassword = 3;
+        }else{
+            acceptRegisterPassword = 2;
+        }
+        if(!confirmPassword){
+            confirmPassword = 0;
+        }else if(registerPassword === confirmPassword){
+            acceptConfirmPassword = 3;
+        }else{
+            acceptConfirmPassword = 1;
+        }
+        if(registerUsername == 0 || acceptRegisterUsername == 1 || acceptRegisterUsername == 2 || registerPassword == 0 || acceptRegisterPassword == 2 || confirmPassword == 0 || acceptConfirmPassword == 1){
+     
+            res.render('users/login',{
+                layout: 'login_register_layout',
+                registerSubmit,
+                registerUsername,
+                registerPassword,
+                confirmPassword,
+                acceptRegisterUsername,
+                acceptRegisterPassword,
+                acceptConfirmPassword,
+                
+            })
+        }else{
+      
+        
+            req.body.avatar = 'chuacohinh'
+            const {registerUsername,registerPassword: plainTextPassword} = req.body;
+            const registerPassword = await bcrypt.hash(plainTextPassword, 10);
+
+            const user = new User({
+                displayname:registerUsername,
+                username:registerUsername,
+                password:registerPassword,
+                
+                avatar:req.body.avatar
+            })
+                try {
+                    user.save();
+                    res.redirect('/users/login')
+                } catch (err) {
+                        res.status(400).send(err)
+                }
+        }
+
 
     }
 
