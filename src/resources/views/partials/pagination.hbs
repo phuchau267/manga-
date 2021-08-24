@@ -13,7 +13,7 @@
                 <a class="page-link prev" rel="prev" {{#ifCond ../current '==' 1}}href="#" {{else}}  href="?page=1"
                     aria-label="prev" {{/ifCond}}>
                     <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Trước</span>
+                    <span class="sr-only">Previous</span>
                 </a>
             </li>
 
@@ -41,7 +41,7 @@
                             <a class="page-link next" rel="next" {{#ifCond ../current '==' ../pages}}href="#" {{else}}
                                 href="?page={{../pages}}" aria-label="next" {{/ifCond}}>
                                 <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Sau</span>
+                                <span class="sr-only">Next</span>
                             </a>
                         </li>
                         {{!-- <li class="page-item ">

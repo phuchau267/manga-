@@ -13,7 +13,7 @@ const path  = require('path');
 const redis = require(path.resolve('./src/config/redis'))
 const { promisify } = require("util");
 const { Promise } = require('mongoose');
-const { IMAGE_URL, HOME_URL, HOME_SITENAME } = require('../../config/config');
+const { IMAGE_URL } = require('../../config/config');
 
 class ComicController {
 
@@ -130,6 +130,9 @@ class ComicController {
         let rateCount = comicdoc.rate.rateCount
         let subscribe = false
         let subscribedComic = (req.user) ? req.user.subscribed : []
+
+        comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
+        
         for (let i = 0; i <= subscribedComic.length; i++) {
           if (JSON.stringify(subscribedComic[i]) === JSON.stringify(comicdoc._id)) {
             subscribe = true
@@ -137,11 +140,6 @@ class ComicController {
           }
         }
         let chaptersLength = comicdoc.chapters.length
-
-        let meta = {
-          home_url: HOME_URL,
-          home_sitename: HOME_SITENAME
-        }
         res.status(200).render('comic.details.hbs', {
           layout: 'comic.details_layout.hbs',
           comic: comicdoc,
@@ -151,8 +149,7 @@ class ComicController {
           lastChapter: comicdoc.chapters[chaptersLength - 1],
           user: singleMongooseToObject(req.user),
           subscribe: subscribe,
-          img_url: IMAGE_URL,
-          meta
+          img_url: IMAGE_URL
         })
       })
       .catch(next)
@@ -174,7 +171,6 @@ class ComicController {
         
         setRedisKey(userIp).then(results => console.log(results))
 
-
         renderChapterView(comicdoc, chapterdoc)
       })
       .catch(err => next(err))
@@ -192,16 +188,13 @@ class ComicController {
     function renderChapterView(comicdoc, chapterdoc) {
 
       //sort to make sure when chapters get deleted then this btn wont callapse
-      comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0); });
+     
+      comicdoc.chapters.sort(function (a, b) { return (a.chapter > b.chapter) ? 1 : ((b.chapter > a.chapter) ? -1 : 0) });
+     
+      // console.log(chaptersList)
       let $thisChapterIndex = comicdoc.chapters.findIndex(x => JSON.stringify(x.chapter) === JSON.stringify(chapterdoc.chapter))
       let prevChapter = comicdoc.chapters[$thisChapterIndex - 1]
       let nextChapter = comicdoc.chapters[$thisChapterIndex + 1]
-      
-      let meta = {
-        home_url: HOME_URL,
-        home_sitename: HOME_SITENAME
-      }
-
       res.status(200).render('chapter.details.hbs',
         {
           layout: 'chapter.details.layout.hbs',
@@ -210,8 +203,7 @@ class ComicController {
           prevChapter: prevChapter,
           nextChapter: nextChapter,
           user: singleMongooseToObject(req.user),
-          img_url: IMAGE_URL,
-          meta
+          img_url: IMAGE_URL
         })
     };
 

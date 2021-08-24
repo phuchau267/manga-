@@ -23,11 +23,11 @@
             <div class="row">
                 <div class="col-12">
 
-                    <h1>Xin chào {{user.name}} !! </h1>
+                    <h1>Hello {{user.name}} !! </h1>
                     <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                         <ol class="breadcrumb pt-0">
                             <li class="breadcrumb-item">
-                                <a href="#">Trang chủ</a>
+                                <a href="#">Home</a>
                             </li>
                             <li class="breadcrumb-item">
                                 <a href="#">Library</a>
@@ -748,7 +748,9 @@
 
         /* Start Search */
         var userData
-        var fetchAPIUrl = 'http://localhost:3000/fetch/users'
+        var pathname = window.location.pathname
+        var domainName = window.location.href.split(`${pathname}`).shift() 
+        var fetchAPIUrl = `${domainName}/fetch/users`
         var search = document.getElementById('search');
         var matchList = document.getElementById('match-list');
         var source = document.getElementById("userSearch-template").innerHTML;

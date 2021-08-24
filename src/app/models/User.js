@@ -10,17 +10,21 @@ const ROLE = {
 };
 const opts = {
   // set lại time zone sang asia
-  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Bangkok") },
+  timestamps: { currentTime: () => moment.tz(Date.now(), "Asia/Ho_Chi_Minh") },
 };
 const User = new Schema({
-  username:{type: String},
-  password:{type: String},
-  displayname:{type: String},
-  avatar:{type: String},
-  googleId:{type:String},
-    facebookId:{type:String},
-    userCreatedAt:{type: String},
-    userUpdatedAt:{type: String},
+    name: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
     role: {
       type: String,
       required: true,
